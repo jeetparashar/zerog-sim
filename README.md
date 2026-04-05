@@ -44,7 +44,7 @@ The current workflow is based on Formula 1 telemetry data from the **2024 Spa qu
 The pipeline:
 
 - loads session data using FastF1
-- selects **Max Verstappen’s fastest lap**
+- selects ** fastest lap**
 - extracts telemetry
 - calculates speed, downforce, normal force, and effective weight
 - simulates multiple gravity levels from **0.0 to 1.0**
