@@ -1,16 +1,103 @@
-# React + Vite
+# ZeroG Sim
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ZeroG Sim is an experimental Formula 1 simulation project where I explore one simple but exciting question:
 
-Currently, two official plugins are available:
+**What would happen to an F1 car if gravity changed?**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project mixes motorsport data, machine learning, and browser-based 3D technology to build a simulation that can show how grip and car behaviour change in low-gravity conditions.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## About the Project
 
-## Expanding the ESLint configuration
+The idea behind ZeroG Sim is to create a realistic and interactive F1 experience that is not just visual, but also data-driven.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Instead of depending only on a traditional physics engine, this project uses a trained machine learning model to estimate grip under different gravity levels. That model is then exported to ONNX so it can be used inside a web-based simulation.
+
+In simple words, this project is my attempt to combine:
+
+- real Formula 1 telemetry
+- AI / machine learning
+- browser-based 3D simulation
+- interactive engineering-style visualisation
+
+---
+
+## What the Project Currently Does
+
+At the moment, the project has two main parts:
+
+### 1. Frontend foundation
+The frontend is built with React and Vite, and it includes tools for 3D rendering and browser-based model inference.
+
+### 2. Physics / AI pipeline
+The Python workflow uses F1 telemetry to generate a dataset, train a neural network, and export the trained model as an ONNX file for later use in the simulation.
+
+So right now, the project is in a strong **prototype / development phase** rather than being a fully finished simulator.
+
+---
+
+## How the Model Works
+
+The current workflow is based on Formula 1 telemetry data from the **2024 Spa qualifying session**.
+
+The pipeline:
+
+- loads session data using FastF1
+- selects **Max Verstappen’s fastest lap**
+- extracts telemetry
+- calculates speed, downforce, normal force, and effective weight
+- simulates multiple gravity levels from **0.0 to 1.0**
+- estimates maximum grip in newtons
+- builds a training dataset
+- trains a PyTorch neural network
+- exports the trained model to ONNX
+
+The exported model can then be used later in the frontend for browser-side inference.
+
+---
+
+## Model Inputs and Output
+
+The current surrogate model uses:
+
+### Inputs
+- `Speed_ms`
+- `Gravity_Factor`
+
+### Output
+- `Max_Grip_Newtons`
+
+This makes the model lightweight and suitable for interactive use inside a web simulation.
+
+---
+
+## Tech Stack
+
+### Frontend
+- React
+- Vite
+- Three.js
+- React Three Fiber
+- Drei
+- Recharts
+- ONNX Runtime Web
+
+### AI / Data Pipeline
+- Python
+- PyTorch
+- ONNX
+- FastF1
+- NumPy
+- Pandas
+- scikit-learn
+
+---
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd zerog-sim
