@@ -92,12 +92,6 @@ This makes the model lightweight and suitable for interactive use inside a web s
 - Pandas
 - scikit-learn
 
----
 
-## Getting Started
-
-### Clone the repository
-
-```bash
 git clone <your-repo-url>
 cd zerog-sim
